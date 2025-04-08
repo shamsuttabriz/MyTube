@@ -28,9 +28,27 @@
           <img class="w-10/12 md:w-full" src="assets/Logo.png" alt="Logo" />
         </div>
         <div class="sort">
-          <button class="btn">Sort By View</button>
+          <label class="input">
+            <svg
+              class="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input id="search-video" type="search" required placeholder="Search" />
+          </label>
         </div>
-        <div class="blogs btn bg-[#FF1F3D] text-white">Blogs</div>
+        <div class="blogs btn bg-[#FF1F3D] text-white">Sort By View</div>
       </nav>
     </header>
 
@@ -54,9 +72,7 @@
       <!-- Modal -->
       <dialog id="video_details" class="modal">
         <div class="modal-box">
-          <div id="video-details-container">
-
-          </div>
+          <div id="video-details-container"></div>
           <div class="modal-action">
             <form method="dialog">
               <!-- if there is a button in form, it will close the modal -->

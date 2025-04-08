@@ -28,8 +28,8 @@ function showCategories(categories) {
 loadCategories();
 
 // Load and Display Videos
-function loadVideos() {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+function loadVideos(searchText = "") {
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
     .then((res) => res.json())
     .then((data) => {
       removeActiveClass();
@@ -132,3 +132,9 @@ const displayVideoDetails = (videoDetails) => {
     </div>
   `
 }
+
+// Searching video
+document.getElementById('search-video').addEventListener('keyup', (e) => {
+  const searchVideo = e.target.value;
+  loadVideos(searchVideo);
+})
