@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MY Tube</title>
+    <!-- Daisy UI -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <header>
+      <nav
+        class="w-11/12 mx-auto flex justify-between items-center border-b border-gray-200 py-4"
+      >
+        <div class="logo">
+          <img class="w-10/12 md:w-full" src="assets/Logo.png" alt="Logo" />
+        </div>
+        <div class="sort">
+          <button class="btn">Sort By View</button>
+        </div>
+        <div class="blogs btn bg-[#FF1F3D] text-white">Blogs</div>
+      </nav>
+    </header>
+
+    <!-- Category Container -->
+    <nav
+      id="category-container"
+      class="flex justify-center items-center gap-5 py-6"
+    >
+      <button class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
+    </nav>
+
+    <main>
+      <!-- Display Videos -->
+      <section
+        id="display-videos"
+        class="w-11/12 mx-auto py-6 grid grid-cols-4 gap-4"
+      ></section>
+    </main>
+
+    <!-- Script Js -->
+    <script src="./script/index.js"></script>
+  </body>
+</html>
