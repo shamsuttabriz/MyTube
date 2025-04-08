@@ -59,7 +59,7 @@ function displayVideos(videos) {
   videos.forEach((video) => {
     const div = document.createElement("div");
     div.innerHTML = `
-      <div class="card bg-base-100 shadow-sm">
+      <div class="card bg-base-100 shadow-sm p-2 border border-slate-400">
         <figure class="relative">
           <img
             class="h-52 object-cover w-full"
@@ -68,7 +68,7 @@ function displayVideos(videos) {
           <span class="bg-slate-900 p-1 rounded text-white text-sm absolute bottom-2 right-2">3hrs 56 min ago</span>
         </figure>
         <div class="p-4 flex gap-4">
-        <img class="w-10 h-10 rounded-full object-cover" src=${video?.authors[0]?.profile_picture} />
+          <img class="w-10 h-10 rounded-full object-cover" src=${video?.authors[0]?.profile_picture} />
           <div>
             <h2 class="card-title">${video?.title}</h2>
             <div class="flex items-center gap-2 py-2">
@@ -77,7 +77,8 @@ function displayVideos(videos) {
             </div>
             <p class="text-slate-600">${video.others.views} views</p>
           </div>
-        </div>
+          </div>
+          <button onclick="loadVideosDetails('${video.video_id}')" class="btn btn-block bg-slate-800 text-white">Show Details</button>
       </div>
     `;
     displayVideos.appendChild(div)
@@ -100,4 +101,34 @@ const  loadCategoryWiseVideo = (id) => {
     categoryBtn.classList.add("active");
     displayVideos(data.category);
   });
+}
+
+
+// Load video Detsils
+const loadVideosDetails = (videoID) => {
+  const detailsUrl = `https://openapi.programming-hero.com/api/phero-tube/video/${videoID}`;
+
+  fetch(detailsUrl)
+  .then(res => res.json())
+  .then(data => displayVideoDetails(data.video))
+}
+
+// Display video details
+const displayVideoDetails = (videoDetails) => {
+  document.getElementById("video_details").showModal();
+  const videoDetailsContainer = document.getElementById('video-details-container');
+  console.log(videoDetails);
+  videoDetailsContainer.innerHTML = `
+    <div class="card bg-base-100 image-full shadow-sm">
+      <figure>
+        <img
+          src="${videoDetails.thumbnail}"
+          alt="Shoes" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">${videoDetails.title}</h2>
+        <p>${videoDetails.description}</p>
+      </div>
+    </div>
+  `
 }

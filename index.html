@@ -14,7 +14,7 @@
 
     <style>
       .active {
-        background-color: #FF1F3D;
+        background-color: #ff1f3d;
         color: white;
       }
     </style>
@@ -50,6 +50,21 @@
         id="display-videos"
         class="w-11/12 mx-auto py-6 grid grid-cols-4 gap-4"
       ></section>
+
+      <!-- Modal -->
+      <dialog id="video_details" class="modal">
+        <div class="modal-box">
+          <div id="video-details-container">
+
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
     </main>
 
     <!-- Script Js -->
