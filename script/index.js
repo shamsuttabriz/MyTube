@@ -1,3 +1,12 @@
+// Remove active class
+function removeActiveClass () {
+  const allActiveClass = document.getElementsByClassName('active');
+  for (let item of allActiveClass) {
+    item.classList.remove('active')
+  }
+}
+
+
 // Load and Show Categories
 function loadCategories() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -8,10 +17,11 @@ function loadCategories() {
 function showCategories(categories) {
   const categoryContainer = document.getElementById("category-container");
   for (let cat of categories) {
-    const button = document.createElement("button");
-    button.classList = "btn btn-sm hover:bg-[#FF1F3D] hover:text-white ";
-    button.innerText = cat.category;
-    categoryContainer.appendChild(button);
+    const categoryDiv = document.createElement("div");
+    categoryDiv.innerHTML = `
+      <button id="btn-${cat.category_id}" onclick="loadCategoryWiseVideo(${cat.category_id})" class="btn btn-sm hover:bg-[#FF1F3D] hover:text-white">${cat.category}</button>
+    `
+    categoryContainer.appendChild(categoryDiv);
   }
 }
 
@@ -21,14 +31,33 @@ loadCategories();
 function loadVideos() {
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then((res) => res.json())
-    .then((data) => displayVideos(data.videos));
+    .then((data) => {
+      removeActiveClass();
+      const allBtn = document.getElementById('all-btn');
+      allBtn.classList.add('active');
+      displayVideos(data.videos)
+    });
 }
 
 function displayVideos(videos) {
   const displayVideos = document.getElementById("display-videos");
+  // Clear previous content videos
+  displayVideos.innerHTML = "";
+
+  // When no content in the videos
+  if(videos.length == 0) {
+    displayVideos.innerHTML = `
+      <div class="col-span-full flex flex-col justify-center items-center py-20">
+        <img src="./assets/Icon.png" alt="No data">
+        <h2 class="text-xl md:text-2xl font-bold mt-5">Oops!! Sorry, There is no content here</h2>
+      </div>
+    `
+    return;
+  }
+
+  // Individual video showing to all videos
   videos.forEach((video) => {
     const div = document.createElement("div");
-    console.log(video)
     div.innerHTML = `
       <div class="card bg-base-100 shadow-sm">
         <figure class="relative">
@@ -55,4 +84,20 @@ function displayVideos(videos) {
   });
 }
 
+
 loadVideos();
+
+
+// Category wise Video Load
+const  loadCategoryWiseVideo = (id) => {
+  const url = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+
+  fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    removeActiveClass();
+    const categoryBtn = document.getElementById(`btn-${id}`);
+    categoryBtn.classList.add("active");
+    displayVideos(data.category);
+  });
+}

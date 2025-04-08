@@ -11,6 +11,13 @@
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+      .active {
+        background-color: #FF1F3D;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -32,7 +39,9 @@
       id="category-container"
       class="flex justify-center items-center gap-5 py-6"
     >
-      <button class="btn btn-sm bg-[#FF1F3D] text-white">All</button>
+      <button id="all-btn" onclick="loadVideos()" class="btn btn-sm active">
+        All
+      </button>
     </nav>
 
     <main>
